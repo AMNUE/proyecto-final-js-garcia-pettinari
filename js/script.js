@@ -1,43 +1,50 @@
 // variables
 
-const addTask = document.getElementById('aniadir-tarea');
-const taskContainer = document.getElementById('contenedor-tarea');
-const inputTask = document.getElementById('input-tarea');
+const addTask = document.getElementById('add-task');
+const taskContainer = document.getElementById('task-container');
+const inputTask = document.getElementById('input-task');
 
-//Event listener para el boton de añadir
 
-addTask.addEventListener('click', function(){
+//Event listener
+
+addTask.addEventListener('click', function() {
 
     let task = document.createElement('div');
-    task.classList.add('task')
+    task.classList.add('task');
 
     let li = document.createElement('li');
     li.innerText = `${inputTask.value}`;
     task.appendChild(li);
-    
-    
+
     let checkButton = document.createElement("button");
     checkButton.innerHTML = '<i class="fa-solid fa-check"></i>';
-    checkButton.classList.add(checkTask);
+    checkButton.classList.add('checkTask');
     task.appendChild(checkButton);
-
 
     let deleteButton = document.createElement("button");
     deleteButton.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
-    deleteButton.classList.add(deleteTask);
+    deleteButton.classList.add('deleteTask');
     task.appendChild(deleteButton);
 
     if(inputTask.value === "") {
-        alert("Porfaver, introduzca una tarea");
+        alert('Please enter a task')
     } else {
         taskContainer.appendChild(task);
     }
 
+    inputTask.value = "";
 
 
+    checkButton.addEventListener('click', function (){
+        checkButton.parentElement.style.textDecoration = "line-through";
+    })
 
+    deleteButton.addEventListener('click', function(e){
 
+        let target = e.target;
+
+        target.parentElement.parentElement.remove();
+    })
 })
-
 
 
